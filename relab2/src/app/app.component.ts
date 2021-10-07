@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -30,6 +31,9 @@ export class AppComponent {
   markerOptions3: google.maps.MarkerOptions;
 
   vertices: google.maps.LatLngLiteral[];
+  vertices2: google.maps.LatLngLiteral[];
+
+  rOption: {fillColor: string};
   
   constructor()
   {
@@ -49,6 +53,8 @@ export class AppComponent {
     this.center_punto3 = {lat:45.5076113,lng:9.1933876}
     this.position_punto3 = this.center_punto3
     this.circleOption_punto3 = {fillColor : 'yellow'}
+
+    this.rOption = {fillColor: 'green'}
 
     let iconData : google.maps.Icon = {
       url:'./assets/img/cat_acrobat.ico',
@@ -80,6 +86,15 @@ export class AppComponent {
       {  lat: this.center.lat, lng: this.center.lng },
       {  lat: this.center.lat - 0.001, lng: this.center.lng - 0.002}
     ];
+
+    this.vertices2 = [
+      { lat: this.center.lat + 0.001, lng: this.center.lng + 0.001 },
+      { lat: this.center.lat - 0.001, lng: this.center.lng + 0.001 },
+      { lat: this.center.lat - 0.001, lng: this.center.lng + 0.002 },
+      { lat: this.center.lat + 0.001, lng: this.center.lng + 0.002 },
+    ];
+
+
     
   }
 
@@ -92,6 +107,18 @@ export class AppComponent {
   
   colore_viola(){
     this.circleOption_punto = {fillColor : 'purple'};
+  }
+
+  colore_RBlu(){
+    this.rOption = {fillColor : 'blue'};
+  }
+
+  colore_RPink(){
+    this.rOption = {fillColor : 'pink'};
+  }
+
+  colore_ROrange(){
+    this.rOption = {fillColor : 'orange'};
   }
 
 

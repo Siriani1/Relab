@@ -42,8 +42,15 @@
 
   <map-polygon [paths]="vertices">
   </map-polygon>
+
+  <map-polygon [paths]="vertices2" [options]='rOption'>
+  </map-polygon>
 </google-map>
 
 <button (click)='colore_giallo()'>Giallo</button>
 <button (click)='colore_rosso()'>Rosso</button>
 <button (click)='colore_viola()'>Viola</button>
+
+<button (click)='colore_RBlu()'>Rblu</button>
+<button (click)='colore_RPink()'>Rrosa</button>
+<button (click)='colore_ROrange()'>Rarancione</button>
