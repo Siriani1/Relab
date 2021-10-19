@@ -10,7 +10,7 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     // Imposta qui le tue api key
-     AgmCoreModule.forRoot({apiKey: 'AIzaSyBevlFuboJBV0XvChG_E4Esu3eZ-MDBHLU'}), 
+     AgmCoreModule.forRoot({apiKey: 'HLUAIzaSyBevlFuboJBV0XvChG_E4Esu3eZ-MDB'}), 
   ],
   providers: [],
   bootstrap: [AppComponent]

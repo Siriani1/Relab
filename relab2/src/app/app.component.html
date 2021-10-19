@@ -1,4 +1,4 @@
-{{title}}
+{{title}}  {{raggio}}
 <!--Centriamo la mappa alle nostre coordinate-->
 <google-map [center]="center" width=100%>  
   <!--Mettiamo un marker alle nostre coordinate-->
@@ -20,14 +20,17 @@
               [options]='markerOptions3'>
   </map-marker>
 
-  <map-circle [center]="position"
-              [radius]="50"
-              [options] = 'circleOption'>
+  <map-circle (radiusChanged) = radiusChanged()
+              [center]="position"
+              [options] = circleOption
+              >
   </map-circle>
 
-  <map-circle [center]="position_punto"
+  <map-circle (radiusChanged) =radiusChanged()
+              [center]="position_punto"
               [radius]="50"
-              [options] = 'circleOption_punto'>
+              [options] = circleOption_punto 
+              >
   </map-circle>
 
   <map-circle [center]="position_punto2"

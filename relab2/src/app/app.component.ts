@@ -1,5 +1,6 @@
 import { ThisReceiver } from '@angular/compiler';
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { MapCircle } from '@angular/google-maps';
 
 @Component({
   selector: 'app-root',
@@ -7,23 +8,24 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'server mappe';
+  title = 'Raggio';
   //Aggiungiamo latitudine e longitudine di un luogo
 
+  //@Output() radiusChange: EventEmitter<number> = new EventEmitter<number>();
 
   center : any;
   position : any;
   label :string;
-  circleOption: { fillColor: string; };
+  circleOption: google.maps.CircleOptions;
   center_punto: { lat: number; lng: number; };
   position_punto: { lat: number; lng: number; };
-  circleOption_punto: { fillColor: string; };
+  circleOption_punto: google.maps.CircleOptions;
   center_punto2: { lat: number; lng: number; };
   position_punto2: { lat: number; lng: number; };
-  circleOption_punto2: { fillColor: string; };
+  circleOption_punto2: google.maps.CircleOptions;
   center_punto3: { lat: number; lng: number; };
   position_punto3: { lat: number; lng: number; };
-  circleOption_punto3: { fillColor: string; };
+  circleOption_punto3: google.maps.CircleOptions;
 
   markerOptions: google.maps.MarkerOptions;
   markerOption: google.maps.MarkerOptions;
@@ -34,17 +36,22 @@ export class AppComponent {
   vertices2: google.maps.LatLngLiteral[];
 
   rOption: {fillColor: string};
+
+
+
+  //private radiusChanged: Observable<google.maps.CircleOptions>;
+
   
   constructor()
   {
     this.center={lat: 45.506738, lng: 9.190766};
     this.position = this.center;
     this.label = "Tu";
-    this.circleOption = {fillColor : 'red'}
+    this.circleOption = {fillColor : 'red', draggable:true, editable:true,radius:50}
 
     this.center_punto={lat:45.5097718,lng:9.189956}
     this.position_punto = this.center_punto
-    this.circleOption_punto = {fillColor : 'blue'}
+    this.circleOption_punto = {fillColor : 'blue', draggable:true, editable:true}
 
     this.center_punto2 = {lat:45.5084981,lng:9.1915138}
     this.position_punto2 = this.center_punto2
@@ -80,6 +87,7 @@ export class AppComponent {
     this.markerOption = {icon:icon}
     this.markerOptions2 = {icon:iconData2}
     this.markerOptions3 = {icon:iconData3}
+     
 
     this.vertices = [
       {  lat: this.center.lat + 0.001, lng: this.center.lng - 0.002 },
@@ -93,13 +101,16 @@ export class AppComponent {
       { lat: this.center.lat - 0.001, lng: this.center.lng + 0.002 },
       { lat: this.center.lat + 0.001, lng: this.center.lng + 0.002 },
     ];
-
-
+    
     
   }
-
+  
   colore_giallo(){
     this.circleOption_punto = {fillColor : 'yellow'};
+    //console.log(google.maps.Circle.length)
+    //console.log(this.circleOption.radius)
+    //console.log(this.radiusChange)
+    //console.log(this.radiusChanged)
   }
   colore_rosso(){
     this.circleOption_punto = {fillColor : 'red'};
@@ -116,12 +127,19 @@ export class AppComponent {
   colore_RPink(){
     this.rOption = {fillColor : 'pink'};
   }
-
+  
   colore_ROrange(){
     this.rOption = {fillColor : 'orange'};
+    console.log(this.circleOption.radius)
+  }
+  raggio = 0;
+  @ViewChild(MapCircle) circle: MapCircle | undefined;
+  radiusChanged(){
+    if(this.circle){
+      this.raggio = this.circle.getRadius();
+    }
   }
 
 
-  
 
 }
