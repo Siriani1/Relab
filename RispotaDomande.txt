@@ -1,0 +1,210 @@
+01
+
+1) A quale località fanno riferimento latitudine e longitudine?
+Milano 
+
+2) Sei in grado di aggiungere un altro marker che indica casa tua?
+si -> allora fallo
+no -> allora chiedi aiuto al professore
+
+constructor()
+  {
+    this.centeR={lat: 45.506738, lng: 9.190766};
+    this.position = this.center;
+    this.label = 'casa';
+  }
+
+}
+
+
+HTML
+
+
+<map-marker [position]="position" [label]="label" [title]="title">
+  </map-marker>	
+
+
+3) Come si aggiunge la libreria google-maps al progetto?
+
+Con npm install @angular/google-maps
+
+
+4) Come si fornisce la chiave di google maps alla libreria?
+
+Andare nel index.html e aggiungere <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY"></script>
+
+5) Qual è il tag che visualizza la mappa?  
+
+<google-map></google-map>
+
+
+6) Come si centra la mappa rispetto a latitudine e longitudine?
+
+<google-map [center]='center'></google-map>
+
+
+7)Come si aggiunge un marker?
+
+<map-marker [position]="position" [label]="label" [title]="title">
+  </map-marker>
+
+
+
+01.1
+
+1) Qual è il tag che ti permette di visualizzare un cerchio?
+
+<map-circle [center]="position"
+              [radius]="50"
+              [options] = 'circleOptions'>
+  </map-circle>
+
+
+2) Quali parametri vengono passati al tag per il cerchio?
+Cosa rappresenta ciascun parametro?
+
+i parametri che vengono passati al cerchio sono center,radius e circleOptions
+
+center per individuare il centro del cerchio
+radius per stabilire la lunghezza del raggio 
+circleOption per le varie opzioni del cerchio
+
+
+
+3) Qual è il tag che ti permette di visualizzare un marker?
+
+<map-marker [position]="position" [label]="label" [title]="title">
+  </map-marker>
+
+
+4)Quali parametri vengono passati al marker in questo esercizio?
+Cosa rappresenta ciascun parametro?
+
+I parametri che vengono passati al cerchio sono position,label,title e circleOptions
+
+position per individuare la posizione del marker 
+label per aggiungere la label al marker 
+il titolo per il titolo dl marker
+circleOption per le varie opzioni del marker
+
+
+5)Quali attributi sono indicati nell’oggetto iconData?
+
+URL e scaledSize
+
+
+6) Qual è il tag che ti permette di visualizzare un poligono?
+
+<map-polygon [paths]="vertices">
+</map-polygon>
+
+
+7)Quali parametri vengono passati al poligono in questo esercizio?
+Cosa rappresenta ciascun parametro?
+
+[path]='vertices
+
+Serve per pasare i lati del poligono
+
+
+8)Come si rappresenta un oggetto in GeoJson?
+
+Con le proprietà type, geometry e properties.
+
+
+9)Come si rappresenta un vettore?
+
+Con le quadre
+
+10)Come si rappresenta un oggetto che contiene un vettore?
+
+{'coordinates':[]}
+
+11)Descrivi il tipo coordinate LineString (lo trovi nella tabella qui sopra) come ho fatto io per Polygon
+
+Nelle coordinate vengono aggiunti tre punti che vengono collegati fra di loro ma senza riempire come il poligono
+
+
+
+02.1
+
+1)Cosa puoi scrivere nella proprietà type della classe Geometry?
+Point, LineString e Polygon
+
+2)Cosa puoi scrivere nella proprietà coordinates della classe Geometry? 
+Le coordinate della figura
+
+3)Cosa puoi scrivere nella proprietà type della classe GeoJson?
+Feature
+
+4) Cosa contiene il campo geometry della classe GeoJson?
+
+Contiene il tipo della figura e le coordinate
+
+5)Cosa può contenere la proprietà properties
+
+Può contenere le proprietà della figura es. il nome
+
+6)Perchè coordinates è di tipo any?
+Perchè non sappiamo di che dimensione è, point,linestring e polygon
+
+7)Cosa contiene il file geojson.model.ts
+
+contiene le coordinate e le proprietà del poligono
+
+
+8)Cosa contiene la costante GEOJSON?
+
+Contiene geoJsonobject
+
+9)A cosa serve il decoratore @ViewChild?
+
+Per usare la libreria javascript in angular
+
+10)Come faccio ad ottenerlo?
+
+mettendo l'id al tag(#mapref)
+
+
+11)A cosa serve il parametro zoom del componente <google-map>
+
+per impostare lo zoom iniziale della mappa
+
+
+
+12)Spiega le seguenti righe di codice
+    let newColor = "#FF0000"; //RED assegna ad una variabile il colore rosso
+    Dato che nel GeoJson ci sono due poligoni diversi in base all'id gli assegnamo il colore
+    se l'id è zero allora gli assegna il colore verde
+    if(feature.i.id == 0) newColor = "#00FF00"; //GREEN 
+    se no il colore blu  
+    else newColor = "#0000FF"; //BLUE
+    return ({
+      restituisce dicendo che il poligono non è cliccabile
+      clickable: false,
+      il colore del poligono
+      fillColor: newColor,
+      e lo spessore del poligono	
+      strokeWeight: 1
+    });
+
+
+13)Nell’esercizio viene riempito il vettore di marker creando un marker alla volta, 
+questo sarebbe un problema nel caso avessimo molti marker sapresti farlo con un ciclo for o for-of?
+
+
+
+for (let feature of  this.geoJsonObject.features)
+{
+   {
+        position : {
+          lng : feature.geometry.coordinates[0][0][0],
+          lat : feature.geometry.coordinates[0][0][1]
+        },
+        label: String(feature.properties.id),
+      }
+}
+
+
+
+
